@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Floating characters
     const characters = ['a', 'b', '1', '0'];
     const container = document.querySelector('.floating-container');
 
@@ -11,4 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
         span.style.animationDuration = (Math.random() * 4 + 2) + 's';
         container.appendChild(span);
     }
+
+    // Background music
+    const audio = document.getElementById("bg-music");
+    audio.muted = false;
+    audio.volume = 0.2;
+    audio.play().catch(e => {
+        console.log('Autoplay failed:', e);
+    });
 });
