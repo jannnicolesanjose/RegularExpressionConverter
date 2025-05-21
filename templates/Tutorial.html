@@ -22,10 +22,20 @@
         <div class="title-container">
             <h1>Video Tutorial</h1>
         </div>
-    <video controls>
-    <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+
+        <video class="video" controls>
+            <source src="{{ url_for('static', filename='videos/WebAppTutorial.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <audio id="bg-music" autoplay loop>
+            <source src="{{ url_for('static', filename='videos/music.mp3') }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+
+    </div>
+
 
     </div>
 
