@@ -16,7 +16,7 @@ body {
     align-items: center;
 }
 
-.main-container {
+#main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,13 +42,17 @@ h1 {
     text-align: center;
 }
 
-video {
-    max-width: 80%;
+.video {
+    width: 95vw;
+    max-width: 1280px;
     height: auto;
-    object-fit: contain;
     display: block;
-    margin: -50px auto; 
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    margin: 40px auto 0 auto;
 }
+
+
 
 .back {
     font-size: 26px;
