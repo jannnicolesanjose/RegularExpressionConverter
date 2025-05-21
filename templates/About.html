@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REC: Regular Expression Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cssAbout/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logoimages/icon.png') }}">
+</head>
+<body>
+
+    <div class="floating-container"></div> 
+
+    <div class="back-button" onclick="history.back()">
+        <div class="circle">
+            <img src="{{ url_for('static', filename='logoimages/backbutton.png') }}" alt="Back Arrow">
+            <b class="back">Back</b>
+        </div>
+    </div>
+
+    <div id="main-container">
+        <div class="title-container">
+            <h1>About</h1>
+        </div>
+
+        <div class="container">
+            <p class="project">Automata Project</p>  
+            <p class="given">
+                This project was developed by Aivee Varias, Jann Nicole San Jose, Timothy Sicad, and Xian Palomares 
+                as part of the requirements for the course <i>Automata Theory and Formal Language</i>. It presents a <i>Deterministic Finite Automaton (DFA) solver</i>, 
+                designed to analyze and determine whether given strings are accepted based on predefined state transitions and acceptance criteria.
+            </p>
+            <p class="given">
+                The DFA solver serves as a computational model that systematically processes input strings and evaluates their validity within a structured framework. 
+                By implementing deterministic state transitions, the solver ensures precise and unambiguous results, making it a valuable tool for understanding foundational concepts in formal language theory.
+            </p>
+            <p class="given">
+                This project not only demonstrates the practical application of DFA principles but also highlights the significance of automata in various computational and real-world scenarios, 
+                such as <i>lexical analysis in programming languages</i> and <i>pattern recognition in data processing</i>. Through this endeavor, 
+                the team aims to enhance comprehension of automata theory while providing an interactive approach to exploring finite state machines.
+            </p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='cssAbout/script.js') }}"></script> 
+
+</body>
+</html>

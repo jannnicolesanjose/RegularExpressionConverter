@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REC: Regular Expression Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cssTutorial/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logoimages/icon.png') }}">
+</head>
+<body>
+
+    <div class="floating-container"></div> 
+
+    <div class="back-button" onclick="history.back()">
+        <div class="circle">
+            <img src="{{ url_for('static', filename='logoimages/backbutton.png') }}" alt="Back Arrow">
+            <b class="back">Back</b>
+        </div>
+    </div>
+
+    <div id="main-container">
+        <div class="title-container">
+            <h1>Video Tutorial</h1>
+        </div>
+    <video controls>
+    <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='cssTutorial/script.js') }}"></script> 
+
+</body>
+</html>

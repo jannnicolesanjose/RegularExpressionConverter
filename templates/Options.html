@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REC: Regular Expression Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cssOptions/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logoimages/icon.png') }}">
+</head>
+
+<body>
+
+    <video class="video-background" autoplay muted loop>
+        <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="back-button" onclick="history.back()">
+        <div class="circle">
+            <img src="{{ url_for('static', filename='logoimages/backbutton.png') }}" alt="Back Arrow">
+            <b class="back">Back</b>
+        </div>
+    </div>
+
+    <div id="main-container">
+        <div class="title-container">
+            <h1>Regular Expression Converter</h1>
+        </div>
+
+        <div id="container">
+            <div class="options-wrapper">
+                <div class="section options-section">
+                    <img class="icon" src="{{ url_for('static', filename='logoimages/Option1.png') }}" alt="Option 1">
+                    <b class="options"> Σ = (a,b)</b>
+                    <a class="option-btn" href="{{ url_for('option1') }}">Select</a>
+                </div>
+                <div class="section options-section">
+                    <img class="icon" src="{{ url_for('static', filename='logoimages/Option2.png') }}" alt="Option 2">
+                    <b class="options"> Σ = (0,1)</b>
+                    <a class="option-btn" href="{{ url_for('option2') }}"href="{{ url_for('option2') }}">Select</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='cssOptions/script.js') }}"></script>
+
+</body>
+</html>

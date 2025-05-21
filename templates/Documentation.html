@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REC: Regular Expression Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cssDocumentation/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logoimages/icon.png') }}">
+</head>
+<body>
+
+    <div class="floating-container"></div> 
+
+    <div class="back-button" onclick="history.back()">
+        <div class="circle">
+            <img src="{{ url_for('static', filename='logoimages/backbutton.png') }}" alt="Back Arrow">
+            <b class="back">Back</b>
+        </div>
+    </div>
+
+    <div id="main-container">
+        <div class="title-container">
+            <h1>Documentation</h1>
+        </div>
+
+        <div class="container">
+            <p class="project">Introduction</p>  
+            <p class="given">
+            Automata theory explores how formal languages are recognized and modeled by abstract computational machines. This project, titled Regular Expression Converter, is designed to support learning 
+            in automata theory by providing a visual and interactive way to understand the behavior of a regular expression.
+            </p>
+
+            <p class="given">
+            Our team has developed a web-based application that allows users to input strings using the alphabets {a,b} or {0,1}. This project focuses on a predefined regular expression, it generates the 
+            equivalent representations of Deterministic Finite Automata (DFA), Context-Free Grammar (CFG), and Pushdown Automata (PDA), based solely on the given regular expression.
+            </p>
+
+            <p class="given">
+            The DFA functionality does not perform full RegEx-to-DFA conversions, instead, it checks whether input strings provided by the user are valid or invalid according to the given regular expression. 
+            This offers users a practical way to experiment with string validation.
+            </p>
+
+            <p class="given">
+            This document acts as both a user manual and a technical reference. It includes foundational concepts (including Regular Expressions, Deterministic Finite Automata, Context-Free Grammar, and Pushdown Automata), 
+            detailed usage instructions, and explanations of the outputs.
+            </p>
+
+            
+            <hr class="section-divider">
+            <p class="project">Regular Expression (RegEx)</p>  
+            <p class="given">
+            Regular Expressions are sequences or patterns of symbols or characters defining a string. These sequences are used to match combinations of symbols or characters in strings. It has five main components: The alphabet 
+            and its set of letters, the null string, parentheses, the kleene star operator, and the plus sign.
+            </p>
+
+            <ul class="custom-list">
+                <li>Alphabet (Σ) - A finite set of characters/symbols from which all regular expressions are made from. It defines a combination or pattern of string (ex. Σ = {a, b}).</li>
+                <li>Null String (Λ) - Denotes an empty string. So for example given a RegEx of (a + Λ), a string of a or an empty string would be valid.</li>
+                <li>Parentheses () - Used to group the characters of an alphabet together and define the scope of operators. Say for example the Regular Expression ab*, which is different from (ab)*. The star operator only applies to b in the former, while the star operator applies to the ab expression as a whole in the latter.</li>
+                <li>Kleene Star Operator (*) - Defines any number of reputation from the preceding expression, including zero. Following the (ab)* example above, a valid string could be Λ, ab, or abababababab.</li>
+                <li>Plus Sign (+) - Also known as a logical OR operator, this denotes a portion in the RegEx which accepts any given expressions grouped in the parentheses. Let's say we have a RegEx of (a + b + ab), a valid string would be, a, b, or ab, but not aa, bb, etc.</li>
+            </ul>
+
+            <p class="subtitle">Regular Expression (0 & 1)</p>  
+            <img src="{{ url_for('static', filename='images/REGEX2.png') }}" alt="REGEX">
+            
+            <p class="given">This RegEx can be described as:</p>
+            <ul class="custom-list">
+                <li>Begins with a specific 3 letter sequence (111 + 101 + 001 + 010)</li>
+                <li>Includes at least 1 or more instance of a specific variable length sequence (1 + 0 + 11)(1 + 0 + 11)*</li>
+                <li>Followed by at least 1 or more instance of a specific 3 letter sequence (111 + 000)(111 + 000)*</li>
+                <li>And ends with a specific 2 letter sequence (01 + 10 + 00)</li>
+            </ul>
+
+            <p class="subtitle">Regular Expression (a & b)</p>  
+            <img src="{{ url_for('static', filename='images/REGEX1.png') }}" alt="REGEX">
+            
+            <p class="given">This RegEx can be described as:</p>
+            <ul class="custom-list">
+            <ul class="custom-list">
+                <li>Begins with a specific variable length sequence (aa + bb + aba + ba)</li>
+                <li>Followed by a specific 3 letter sequence (aba + bab + bbb)</li>
+                <li>Followed by a sequence of any number of ‘a’s or ‘b’s, which is optional.</li>
+                <li>Followed by a specific variable length sequence (a + b + aa + bba + abab)</li>
+                <li>And ends with a sequence of any number of ‘aa’s or ‘bb’s, which is optional.</li>
+            </ul>
+
+            </ul>
+
+            <hr class="section-divider">
+            <p class="project">Deterministic Finite Automata (DFA)</p>
+
+            <p class="given">
+            Finite automata are abstract machines used to recognize patterns over a given set of input symbols or alphabet. 
+            Its primary function is to determine whether an input string conforms to a defined pattern by either accepting or rejecting it. 
+            </p>
+
+            <p class="given">
+            A Deterministic Finite Automaton (DFA) is a specific type of finite automaton where, for every input symbol, there is exactly one defined transition 
+            from the current state to another state. Furthermore, null (or Λ) is not allowed in a DFA. Thus, unlike other models, a DFA does not allow transitions without consuming an input symbol.
+            According to Sisense (2025), DFAs are finite state machines that accept or reject strings of characters by parsing them through a sequence that is uniquely determined by each string. 
+            This deterministic nature ensures that for any given input, the DFA follows a single, unambiguous path through its states.
+            </p>
+
+            <p class="given">The structure of a DFA is represented through a state diagram and is composed of the following key components:</p>
+            <ul class="custom-list">
+                <li>A finite number of states typically depicted as circles</li>
+                <li>A single initial state, marked by a minus (−) sign in this project</li>
+                <li>Final state/s, marked by plus (+) sign in this project</li>
+                <li>A finite input alphabet (Σ), consisting of all allowed input symbols</li>
+                <li>TA transition function, illustrated as arrows between states and labeled with corresponding input symbols</li>
+            </ul>
+
+            <p class="given">
+            A DFA operates by scanning an input string from left to right, reading one symbol at a time. At each step, the DFA evaluates the current input symbol in relation to its current state and 
+            transitions to the next state as defined by the transition function. This sequential evaluation continues until the entire input string is read/processed. A DFA includes one initial state, 
+            where the process begins, and one or more number of final states. A string is accepted if, after processing all its symbols, the DFA ends in one of the designated final states. Otherwise, it is rejected. 
+            In the context of this project, this process is implemented to validate whether a user's input string adheres to the pattern specified by a given regular expression.
+            </p>
+
+            <p class="given">
+            To visualize this behavior, each state is represented by a circle or ellipse in the graph. The initial state is denoted by a minus sign (−) rather than the usual incoming arrow, while final states are marked with a plus sign (+) 
+            instead of using double circles, as is typically practiced in other materials. The transitions between states are illustrated using arrows labeled with the corresponding input symbols. If a state transitions to itself when reading 
+            a symbol, it forms a loop, which is also clearly depicted in the diagram.
+            </p>
+
+            <p class="given">
+            To ensure the determinism of the DFA, each state must have exactly one defined transition for every symbol in the input alphabet. There can be no ambiguity or missing transitions. If an input symbol is invalid or incorrect based on 
+            the given pattern from the regular expression, it will go to a trap state and loops there to itself on all remaining input symbols to lock the DFA in a rejecting state. This is to ensure determinism and proper handling of all cases.
+            </p>
+
+            <p class="given">
+            In this project, each DFA was constructed from a corresponding regular expression that was defined in the previous section. While multiple DFAs can be derived from a single regular expression, the group aimed to design these versions 
+            with the minimal number of states possible while maintaining the required and optional group patterns in the given regular expression.
+            </p>
+
+
+            <p class="subtitle">Deterministic Finite Automata (0 & 1)</p>  
+            <img src="{{ url_for('static', filename='images/DFA2.png') }}" alt="REGEX">
+            <p class="given">
+            The DFA above uses only the alphabet Σ = {0, 1} as input symbols. Thus, the graph below has exactly two outgoing arrows with labels of either 1 or 0 from each state as transition to the next state. As mentioned, the DFA starts at the initial state. 
+            If the DFA reads the first symbol as 1, it transitions to the next state its arrow is going towards. In this case is the q1 or the first state at the top which represents the beginning of input patterns such as “111” or “101”. Conversely, if the first 
+            symbol reads as 0, it transitions to the q2 or the first state at the bottom,  which begins processing input patterns like “001” or “010.” The string that the DFA allows should be starting with four specific 3-symbol substrings: 111, 101, 001, or 010. 
+            Based on the substrings, the string can start and be possibly transition to another state following the transition arrows labeled with either 1 or 0. The initial transitions are therefore designed to guide the automaton into different paths depending on these valid prefixes. 
+            From q1 and q2, further transitions move the DFA through states q3 to q7 to validate these 3-character openings. However, the third input symbol is important as the transition arrow will lead to a trap state (q6) if the read pattern for the beginning input string is substrings: 011, 000, 100, or 110.  
+            The trap state has self-loop transitions on both 0 and 1, ensuring that once entered, no valid acceptance path remains—thus, effectively rejecting the input string.     
+            </p>
+
+            <p class="given">
+            The middle part of the DFA is deliberately constructed to allow flexible sequences of 1- or 2-symbol segments, consistent with the subexpression (1 + 0 + 11)(1 + 0 + 11)*. This is implemented through the states q7 to q14, which handle combinations such as 1, 0, 11, 10, 01, and 00. 
+            Transitions between these states allow repeated traversal of valid combinations. For instance:
+            </p>
+
+            <ul class="custom-list">
+                <li>q7 → q8 → q10 will form 11</li>
+                <li>q7 → q8 → q9 will form 10</li>
+                <li>q7 → q9 → will form 01</li>
+                <li>q9 → q12 will form 00</li>
+            </ul>
+
+            <p class="given">
+            Furthermore, the DFA also integrates a required repetition of three-symbol patterns (i.e., 111 or 000) in the middle. This is handled by states q13 to q20, which ensure that these exact sequences are recognized. These patterns are matched through chained transitions across three states, with final transitions landing in q21 or q23, representing successful matches of 111 or 000, respectively. The repetition of the patterns of substring in the middle was done by utilizing loops or having both the source and target point of the transition within the state itself.
+    
+            </p>
+
+            <p class="given">
+             After processing the required middle sequences, the DFA transitions to its final phase, which checks whether the string ends with a valid two-symbol pattern: 01, 10, or 00. This checking of substring is implemented through the transitions from q21 and q23 to states q24, q25, q26, and q27, depending on the combination encountered. This ensures that the only accepted strings are those that: (1) start with a specifically valid 3-symbol substring, (2) contain repeated flexible or structured sequences in the middle, and (3) end with one of the three required 2-symbol substring.
+   
+            </p>
+
+            <p class="given">
+             This DFA for the first given regular expression includes a total of six (6) final states. These final states represent successful completions of various valid paths within the DFA, each corresponding to different accepted substrings or terminal conditions. If the input string is still not read completely after reaching a final state, it will be transitioned back to the previous states so that it can continue processing, and be ensured that the end of the input string has the required two-symbol substring that is only either “01”, “10”, or “00.” 
+   
+            </p>
+
+            <p class="given">
+             Thus, the DFA is both complete and deterministic, ensuring that only valid strings described by the given regular expression, (111 + 101 + 001 + 010)(1 + 0 + 11)(1 + 0 + 11)*(111 + 000)(111 + 000)*(01 + 10 + 00), are accepted.   
+            </p>
+
+            <p class="subtitle">Deterministic Finite Automata (a & b)</p>  
+            <img src="{{ url_for('static', filename='images/DFA1.png') }}" alt="REGEX">
+            <p class="given">
+            This DFA is constructed to accept strings that conform precisely to the pattern defined by the regular expression above. It is designed over the alphabet Σ = {a, b}, and implements a structured approach where every valid input must 
+            sequentially satisfy the multiple grouped segments of the regular expression. The DFA, is systematically built with three major parts based on the required string structure, and included the optional string structures at the end as loops 
+            for any combination from (a+b)* and repetition of substrings aa and bb. This design ensures only strings matching all conditions in sequence are accepted. 
+            </p>
+
+            <p class="given">
+            The DFA begins in the initial state where it evaluates the first segment of the input string, which must match one of the four substrings: aa, bb, aba, or ba. The first required pattern or the required beginning input symbol sequence branches 
+            from this initial state which will transition into different paths depending on whether the first symbol is ‘a’ or ‘b.’ The transitions from the initial state guide the input either to q1 (first state at the left-top row) if it starts with a or to q4 
+            (first state at the left-bottom row) if it begins with b. The input symbol 'b' leads to q4, aiming to process bb or ba. Whereas, the input symbol ‘a’ leads to q1 to evaluate possible starts such as aa or aba. If the third read input symbol after the sequence ‘ab’ is b, 
+            then it will result in a transition to a trap state, from which no valid final state can be reached due to its self-loop. 
+            </p>
+
+            <p class="given">
+            After successfully matching the first pattern, the DFA proceeds to validate the second required substring, which must be exactly one of the following: aba, bab, or bbb. From the central node, if the next input symbol is 'a', the automaton transitions along a path that checks 
+            for the sequence aba by reading 'a' followed by 'b', and then 'a' again. Any deviation from this exact sequence leads to trap state T2, which invalidates the input. Alternatively, if the next input is 'b', the DFA may validate either bab or bbb:
+            </p>
+
+            <ul class="custom-list">
+                <li>For bab, its transitions are those with the labels 'b' → 'a' → 'b'</li>
+                <li>For bbb, the sequence of transitions is 'b' → 'b' → 'b'</li>
+            </ul>
+
+            <p class="given">
+            In both cases, if the input deviates from these exact sequences, the automaton transitions to trap state T2. This ensures that only strings conforming precisely to one of the specified substrings are accepted at this stage.
+            </p>
+
+            <p class="given">
+            In between this second group of required substring and the required ending substring is an optional occurrence of any combination of a and b. As this optional group and the required ending substring both include the input symbol a and b, then a three looping states (q12, q13, q14) 
+            with transitions was utilized to enforce the final structural compliance as these three are designated as final states. These states representing a loop cycle enable the matching of longer symbol sequence by switching between any of the three final states. These cyclic connections also 
+            handle the final optional group of the regular expression, which allows zero or more repetitions of double letters (i.e., aa or bb). 
+            </p>
+
+            <p class="given">
+            The transitions are deterministic and designed to ensure that only strings that match the entire structure defined by the second given regular expression, (aa + bb + aba + ba)(aba + bab + bbb)(a + b)*(a + b + aa + bba + abab)(aa + bb)* are accepted. The loop involving the three interconnected 
+            final states involved a structured approach that enabled both optional repetition and strict compliance with the required final symbols in the string sequence.
+            </p>
+
+            <p class="given">
+            The two presented DFAs and its corresponding explained logic were used as reference by the group in order to create a web-based application that validates a user-inputted string by simulating each input symbol through the DFA graph. The DFA was visualized on the website using an open-source JavaScript library 
+            called Cytoscape, and was styled, animated, and implemented using HTML, CSS and JavaScript.
+            </p>
+            
+
+            <hr class="section-divider">
+            <p class="project">Context-Free Grammar (CFG)</p>  
+            <p class="given">
+                According to Moore, et al. (2025), Context-free grammars can generate context-free languages. 
+                They do this by taking a set of variables which are defined recursively, in terms of one another, by a set of production rules. 
+                Context-free grammars are named as such because any of the production rules in the grammar can be applied regardless of context—it 
+                does not depend on any other symbols that may or may not be around a given symbol that is having a rule applied to it.
+            </p>
+
+            <p class="given">Context-Free Grammar (CFG) is defined by four main components:</p>
+            <ul class="custom-list">
+                <li>Terminal Symbol (Σ) - This is the finite set of terminal symbols, which are the actual characters that appear in the strings generated by the grammar.</li>
+                <li>Nonterminal Symbols -  These are used to represent language patterns and help construct terminal strings.</li>
+                <li>Production Rules - These define how nonterminal symbols can be replaced by combinations of terminals and/or other nonterminals. Each production rule is typically written in the form: A->a</li>
+                <li>Start Symbol (S) - which is a special nonterminal symbol that appears in the initial string generated by the grammar.</li>
+
+            </ul>
+
+            <p class="given">
+            In this project, the CFG is generated based on the given regular expression. Each part of the regular expression is broken down into a structured set of production rules that follow the logic of context-free grammars.
+            </p>
+
+            <p class="subtitle">Context-Free Grammar (0 & 1)</p>  
+            <img src="{{ url_for('static', filename='images/CFG2.png') }}" alt="REGEX">
+            <p class="given">
+            For the first regular expression using the alphabet 0 and 1:
+            (111 + 101 + 001 + 010)(1 + 0 + 11)(1 + 0 + 11)*(111 + 000)(111 + 000)*(01 + 10 + 00). The first group, (111 + 101 + 001 + 010), is converted into a production rule like U → 111 | 101 | 001 | 010, capturing all valid patterns in that segment. 
+            The second group (1 + 0 + 11) becomes V → 1 | 0 | 11, while the third group (1 + 0 + 11)* introduces recursion: W → 1W | 0W | 11W | ε, allowing unlimited repetition of any of those patterns. The fourth and fifth groups—both (111 + 000)—are 
+            expressed with rules like X → 111 | 000 and recursive variant Y → 111Y | 000Y | ε for the repeated pattern. The final group (01 + 10 + 00) is converted into a rule like Z → 01 | 10 | 00. Assembling these components into one CFG, we define a start symbol such as 
+            S with a production like S → U V W X Y Z, guiding the derivation of complete strings from the original pattern.
+            </p>
+
+            <p class="subtitle">Context-Free Grammar (a & b)</p>  
+            <img src="{{ url_for('static', filename='images/CFG1.png') }}" alt="REGEX">
+            <p class="given">
+            For the second regular expression using the alphabet a and b:
+            (aa + bb + aba + ba) (aba + bab + bbb) (a + b)* (a + b + aa + bba + abab) (aa + bb)*. Same with the first example, we break this expression into groups and assign each to a nonterminal symbol.The first segment (aa + bb + aba + ba) is represented with a production rule such as 
+            V → aa | bb | aba | ba, where V is a nonterminal symbol that captures all the valid sequences in that group. Similarly, the second group (aba + bab + bbb) would have a corresponding rule like W → aba | bab | bbb. For the third group (a + b)*, which denotes repetition, recursion is introduced using a rule like X → aX | bX | , 
+            where ε denotes an empty string, allowing the grammar to generate strings of any length composed of a and b. The fourth group, (a + b + aa + bba + abab), is treated similarly using a rule such as Y → a | b | aa | bba | abab. Finally, the last group (aa + bb)* is expressed using recursive rules like Z → aaZ | bbZ | , 
+            enabling the generation of an arbitrary number of repeating aa and bb sequences. Together, these rules form a complete CFG capable of generating all strings described by the original regular expression.
+            </p>
+
+
+
+            <hr class="section-divider">
+            <p class="project">Pushdown Automata (PDA)</p>  
+            <p class="given">
+            Hopcroft and Ullman (2025) state that Pushdown Automata (PDA) add a stack to finite state machines to enable them to recognize context-free languages. A PDA uses a stack to store or retrieve symbols as it transitions from one state to another 
+            following specific rules given in advance. Three factors affect each transition in a PDA which are represented by the present state, the input symbol and what is on top of the stack. PDA’s have the ability to select from several possible paths 
+            forward depending on the input and the contents of the stack which finite automata cannot do. Moreover, because they can deal with non-regular patterns, PDAs become important tools for use in parsing and syntax analysis. 
+            </p>
+
+            <p class="given">PDA is represented by a state diagram comprising six components:</p>
+            <ul class="custom-list">
+                <li>A finite number of states, represented by vertices.</li>
+                <li>A finite set of input symbols, known as the alphabet</li>
+                <li>A finite set of stack symbols used for temporary storage.</li>
+                <li>Transitions labeled with input symbols and stack operations (push, pop, or no change).</li>
+                <li>An initial state where processing begins, denoted as the ‘START’ state.</li>
+                <li>One or more final states, known as accepting states, denoted as the ‘ACCEPT’ state.</li>
+            </ul>
+
+
+            <p class="subtitle">Pushdown Automata (0 & 1)</p>  
+            <img src="{{ url_for('static', filename='images/PDA2n.png') }}" alt="REGEX">
+            <p class="given">
+            Like the first PDA, the second is built using the second CFG to ensure the correct recognition and processing of appropriate strings within its language. The second PDA is built with labeled states helping direct the computation, showing an initial state, several transition states and a final state, all linked by arrows pointing to the next state. Using the input characters ‘1’ and ‘0’, these transitions define the action of the PDA for each symbol in the input sequence while it uses the stack.             
+            </p>
+
+            <p class="given">
+            Laying out stack actions together with state changes allows the PDA to detect difficult patterns, illustrating that context-free grammars can do more than finite automata. This demonstration is important when checking the correctness of syntax, with parsing and formal language processing being main examples.
+            </p> 
+            
+            <p class="subtitle">Pushdown Automata (a & b)</p>  
+            <img src="{{ url_for('static', filename='images/PDA1.png') }}" alt="REGEX">
+            <p class="given">
+            The first PDA uses the first given Context-Free Grammar which allows it to identify strings in the specified language. There are several described states in the PDA, including START, READ and ACCEPT, connected to each other by arrows that represent possible movements caused by input letters. In PDA, these states refer to different steps where the automaton uses a stack to check for context.                
+            </p>
+            <p class="given">
+            To change states, a PDA looks at the state it is in, the entered symbol and the top stack element. Most importantly, the diagram demonstrates changes linked to input symbols "a" and "b," although for a PDA, these transitions use stack operations to manage and use the necessary symbols for nested commands. The whole process starts with START, as the automaton looks through input and prepares work on the stack; when a successful match is found by reaching ACCEPT, the process ends.
+            </p>
+
+
+            <hr class="section-divider">
+            <p class="project">User's Manual</p>  
+            <p class="given">
+            Welcome to the Regular Expression Converter Web Application User’s Manual. This guide is designed to help users navigate and utilize the features of our web-based application 
+            developed for converting Regular Expressions into their equivalent Deterministic Finite Automata (DFA), Context-Free Grammar (CFG), and Pushdown Automata (PDA) representations.
+            </p>
+
+            <p class="given">
+            This application was created to support students and learners in better understanding formal language theory and automata concepts by providing an interactive platform for simulation 
+            and visualization. Whether you're a beginner exploring the basics of regular expressions or a student needing visual aids for DFA, CFG, or PDA, this manual will walk you through every component of the system.
+            </p>
+
+            <p class="given">By following this manual, users will gain insights into how to:</p>
+            <ul class="custom-list">
+                <li>Navigate different pages such as Home, ABout, Tutorial, and Documentation</li>
+                <li>Use the simulation features for two types of regular expression (a&b or 0&1)</li>
+                <li>Interpret DFA transitions with animated and visual feedback</li>
+                <li>View corresponding CFG and PDA of the given regular expressions</li>
+                <li>And efficiently clear or reset inputs</li>
+            </ul>
+
+            <p class="given">
+            This manual ensures that the users can make full use of the system with ease and confidence by providing step-by-step  guidance, clear explanations, and detailed descriptions of each feature available in the web application. 
+            </p>
+ 
+            <p class="user-subtitle">Exploring Home Page</p>  
+            <p class="user-given">
+            Upon accessing the web application, you are greeted with the Home Page, which contains the following sections:</p>
+
+            <ol type="A" class="custom-lists">
+                <li>
+                Navigation Menu
+                    <ul class="unlisted">
+                        <li>
+                            <span class="item-title">Home</span>
+                            <span class="item-desc"> - returns you to the main page</span>
+                        </li>
+                        <li>
+                            <span class="item-title">About</span>
+                            <span class="item-desc"> - you will learn about the project and developers</span>
+                        </li>
+                        <li>
+                            <span class="item-title">Tutorial</span>
+                            <span class="item-desc"> - you can watch a guide on how to use the web app</span>
+                        </li>
+                        <li>
+                        <span class="item-title">Documentation</span>
+                        <span class="item-desc"> - you can read definitions and technical references</span>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                Get Started Button<br>
+                <p class="item-desc">Leads you to two options:</p>
+                    <ul class="unlisted">
+
+                        <li>
+                            <span class="item-title">Option 1:</span>
+                            <span class="item-desc"> Regular Expression using ‘a’  and ‘b’</span>
+                        </li>
+                        <li>
+                            <span class="item-title">Option 2:</span>
+                            <span class="item-desc"> Regular Expression using ‘0’ and ‘1’</span>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+
+            <p class="user-subtitle">Exploring About Page</p>  
+            <p class="user-given">
+            In the About Page the you will find:</p>
+                <ul class="unlisted">
+                    <li>
+                        <span class="item-title">About Us</span>
+                        <span class="item-desc"> - you  can view the details about the development team</span>
+                    </li>
+                    <li>
+                        <span class="item-title">Project Overview</span>
+                        <span class="item-desc"> - you will know the purpose of this web applications, 
+                            which is to convert regular expressions into Deterministic Finite Automata (DFA), Context-Free Grammar (CFG), and Pushdown Automata (PDA).</span>
+                    </li>
+                    <li>
+                        <span class="item-title">Back Button</span>
+                        <span class="item-desc"> - you can see the back button above the top of the page, when you click it, they will return to the Home Page.</span>
+                    </li>
+                </ul>
+
+            <p class="user-subtitle">Exploring Tutorial Page</p>  
+            <p class="user-given">
+            In the Tutorial Page, you can:</p>
+                <ul class="unlisted">
+                    <li>
+                        <span class="item-title">Video</span>
+                        <span class="item-desc"> - you can watch an instructional video that shows how to use all the features of the web application.</span>
+                    </li>
+                    <li>
+                        <span class="item-title">Back Button</span>
+                        <span class="item-desc"> - you can see the back button above the top of the page, when you click it, they will return to the Home Page.</span>
+                    </li>
+                </ul>
+
+            <p class="user-subtitle">Exploring Documentation Page</p>  
+            <p class="user-given">
+            The Documentation Page contains:</p>
+
+            <ol type="A" class="custom-lists">
+                <li>
+                Definitions and Explanations of:
+                    <ul class="unlisted">
+                        <li>
+                            <span class="item-titles">Regular Expression</span>
+                        </li>
+                        <li>
+                            <span class="item-titles">Deterministic Finite Automata (DFA)</span>
+                        </li>
+                        <li>
+                            <span class="item-titles">Context-Free Grammar (CFG)</span>
+                        </li>
+                        <li>
+                            <span class="item-titles">Pushdown Automata (PDA)</span>
+                        </li>
+                        <li>
+                        <span class="item-titles">Documentation</span>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                User’s Manual
+                <p class="item-desc"> - the guide is also available in this section</p>
+                </li>
+                <li>
+                Illustrations
+                <p class="item-desc"> - you can view the visual representation of DFA, CFG, and PDA</p>
+                </li>
+                <li>
+                Back Button
+                <p class="item-desc"> - you can see the back button above the top of the page, when you click it, they will return to the Home Page.</p>
+                </li>
+            </ol>
+
+            <p class="user-subtitle">Get Started</p>  
+            <p class="user-given">
+            Clicking the Get Started on the Home Page it will lead you to a selection page with two options:</p>
+                <ul class="unlisted">
+                    <li>
+                        <span class="item-title">Option 1:</span>
+                        <span class="item-desc"> - Regular Expression using ‘a’ and ‘b’</span>
+                    </li>
+                    <li>
+                        <span class="item-title">Option 2:</span>
+                        <span class="item-desc"> - Regular Expression using ‘0’ and ‘1’</span>
+                    </li>
+                    <li>
+                        <span class="item-title">Back Button</span>
+                        <span class="item-desc"> - you can see the back button above the top of the page, when you click it, they will return to the Home Page.</span>
+                    </li>
+                </ul>
+
+            <p class="user-subtitle">Option 1: Regular Expression 1 (a & b)</p>  
+            <p class="user-given">
+            This page allows you to interact with a DFA simulator:</p>
+
+            <ol type="A" class="custom-lists">
+                <li>
+                Input Section:
+                    <ul class="unlisted">
+                        <li class="item-titles">5  individual containers to enter strings containing variables a and b</li>
+                        <li class="item-titles">Each input has a Simulate button to process the string</li>
+                        <li class="item-titles">Result Box shows whether the inputted string is Valid or Invalid</li>
+                        <li>
+                            <span class="item-title">About</span>
+                            <span class="item-desc"> - you will learn about the project and developers</span>
+                        </li>
+                        <li>
+                            <span class="item-title">Tutorial</span>
+                            <span class="item-desc"> - you can watch a guide on how to use the web app</span>
+                        </li>
+                        <li>
+                        <span class="item-title">Documentation</span>
+                        <span class="item-desc"> - you can read definitions and technical references</span>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                DFA Visualization:
+                    <ul class="unlisted">
+                        <li class="item-titles">An animated graph displays the DFA and process for each string</li>
+                       <li class="item-titles">Arrows and nodes highlight the transition </li>
+                    </ul>
+                </li>
+
+                <li>
+                Additional Features:
+                    <ul class="unlisted">
+                        <li>
+                            <span class="item-title">Clear Button</span>
+                            <span class="item-desc"> - clears all 5 inputs</span>
+                        </li>
+                        <li>
+                            <span class="item-title">CFG Button</span>
+                            <span class="item-desc"> - shows the CFG of the regular expression (a & b)</span>
+                        </li>
+                        <li>
+                            <span class="item-title">PDA Button </span>
+                            <span class="item-desc"> - shows the PDA of the regular  expression (a & b)</span>
+                        </li>
+                        <li>
+                        <span class="item-title">Back Button</span>
+                        <span class="item-desc"> - you can see the back button above the top of the page, when you click it, they will return to the DFA Simulation.</span>
+                        </li>
+                    </ul>
+                </li>
+
+            <p class="user-subtitle">Option 2: Regular Expression 2 (0 & 1)</p>  
+            <p class="user-given">
+            This page allows you to interact with a DFA simulator:</p>
+
+            <ol type="A" class="custom-lists">
+                <li>
+                Input Section:
+                    <ul class="unlisted">
+                        <li class="item-titles">5  individual containers to enter strings containing variables 0 and 1</li>
+                        <li class="item-titles">Each input has a Simulate button to process the string</li>
+                        <li class="item-titles">Result Box shows whether the inputted string is Valid or Invalid</li>
+                        <li>
+                            <span class="item-title">About</span>
+                            <span class="item-desc"> - you will learn about the project and developers</span>
+                        </li>
+                        <li>
+                            <span class="item-title">Tutorial</span>
+                            <span class="item-desc"> - you can watch a guide on how to use the web app</span>
+                        </li>
+                        <li>
+                        <span class="item-title">Documentation</span>
+                        <span class="item-desc"> - you can read definitions and technical references</span>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                DFA Visualization:
+                    <ul class="unlisted">
+                        <li class="item-titles">An animated graph displays the DFA and process for each string</li>
+                       <li class="item-titles">Arrows and nodes highlight the transition </li>
+                    </ul>
+                </li>
+
+                <li>
+                Additional Features:
+                    <ul class="unlisted">
+                        <li>
+                            <span class="item-title">Clear Button</span>
+                            <span class="item-desc"> - clears all 5 inputs</span>
+                        </li>
+                        <li>
+                            <span class="item-title">CFG Button</span>
+                            <span class="item-desc"> - shows the CFG of the regular expression (0 & 1)</span>
+                        </li>
+                        <li>
+                            <span class="item-title">PDA Button </span>
+                            <span class="item-desc"> - shows the PDA of the regular  expression (0 & 1)</span>
+                        </li>
+                        <li>
+                        <span class="item-title">Back Button</span>
+                        <span class="item-desc"> - you can see the back button above the top of the page, when you click it, they will return to the DFA Simulation.</span>
+                        </li>
+                    </ul>
+                </li>
+
+            </ol>
+    <footer class="developer-footer">
+        <p>Developed by:</p>
+        <ul class="developer-names">
+            <li>Xian Angel B. Palomares</li>
+            <li>Timothy Allen N. Sicad</li>
+            <li>Jann Nicole C. San Jose</li>
+            <li>Aivee Jean G. Varias</li>
+            <li>2025</li>
+
+        </ul>
+    </footer>
+
+            
+        </div>
+    
+    <script src="{{ url_for('static', filename='cssDocumentation/script.js') }}"></script> 
+
+
+</body>
+</html>

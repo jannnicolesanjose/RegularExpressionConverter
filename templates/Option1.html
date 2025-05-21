@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REC: Regular Expression Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cssOption1/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logoimages/icon.png') }}">
+    <script src="https://unpkg.com/cytoscape@3.24.0/dist/cytoscape.min.js"></script>
+</head>
+<body>
+    <video class="video-background" autoplay muted loop>
+        <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="back-button" onclick="history.back()">
+        <div class="circle">
+            <img src="{{ url_for('static', filename='logoimages/backbutton.png') }}" alt="Back Arrow">
+            <b class="back">Back</b>
+        </div>
+    </div>
+
+    <div id="container">
+        <h1>(aa + bb + aba + ba)(aba + bab + bbb)(a + b)*(a + b + aa + bba + abab)(aa + bb)*</h1>
+        <h2>Input five (5) strings to test</h2>
+
+        <div id="input-container">
+            <!-- Input rows -->
+            {% for i in range(1, 6) %}
+            <div class="input-row">
+                <input type="text" class="input-box" id="inputString{{ i }}" placeholder="Enter string {{ i }}">
+                <div class="result-box" id="result{{ i }}">Result</div>
+                <button class="sim-button" onclick="simulateDFA({{ i }})">Simulate</button>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div id="cy"></div>
+
+        <div id="button-container">
+            <button class="clear-button" onclick="clearAll()">Clear</button>
+            <a class="cfg-button" href="{{ url_for('cfg1') }}">CFG</a>
+            <a class="pda-button" href="{{ url_for('pda1') }}">PDA</a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='cssOption1/script.js') }}"></script>
+</body>
+</html>

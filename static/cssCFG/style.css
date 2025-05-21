@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background-color: rgb(1, 97, 109, 0.9);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+} 
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    position: relative;
+}
+
+.title-container {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    transform: translateX(-50%);
+    top: 50px;
+    left: 50%;
+    width: 100%;
+}
+
+h1 {
+    color: white;
+    font-size: 36px;
+    text-align: center;
+}
+
+.container {
+    background-color: white;
+    width: 60%;
+    max-width: 1500px;
+    min-height: 650px;
+    top: 150px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 3px solid rgba(4, 233, 249, 0.932);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.cfg {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.8;
+    margin-top: 10px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+.given{
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.8;
+    margin-top: 10px;
+    padding-top: 20px;
+    width: 100%;
+}
+
+.convertion {
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+    border-collapse: collapse;
+    width: auto;
+    font-family: monospace;
+    margin-top: 30px;
+}
+.convertion td {
+    padding: 10px 10px;
+}
+
+
+.back {
+    font-size: 26px;
+    color: #ffffff;
+    position: fixed;
+    top: 45px;
+    left: 100px;
+    z-index: 10;
+    text-shadow: 3px 3px 3px #000000;
+}
+
+.back-button {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    background-color: #027979;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+}
+
+.circle img {
+    width: 40px;
+    height: 40px;
+    filter: invert(100%);
+}

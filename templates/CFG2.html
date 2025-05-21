@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REC: Regular Expression Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cssCFG/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logoimages/icon.png') }}">
+</head>
+<body>
+
+    <video class="video-background" autoplay muted loop>
+        <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="back-button" onclick="history.back()">
+        <div class="circle">
+            <img src="{{ url_for('static', filename='logoimages/backbutton.png') }}" alt="Back Arrow">
+            <b class="back">Back</b>
+        </div>
+    </div>
+
+    <div id="main-container">
+        <div class="title-container">
+            <h1>Context-Free Grammar (CGF)</h1>
+        </div>
+
+        <div class="container">
+            <p class="cfg">Context-Free Grammar Convertion</p>
+
+            <p class="given">(111 + 101 + 001 + 010) (1 + 0 + 11) (1 + 0 + 11)* (111 + 000) (111 + 000)* (01 + 10 + 00)</p>
+
+            <table class="convertion">
+                <tr><td>S</td> <td>→</td> <td>U V W X Y Z</td></tr>
+                <tr><td>U</td> <td>→</td> <td>111 | 101 | 001 | 010</td></tr>
+                <tr><td>V</td> <td>→</td> <td>1 | 0 | 11</td></tr>
+                <tr><td>W</td> <td>→</td> <td>1W | 0W | 11W | Λ</td></tr>
+                <tr><td>X</td> <td>→</td> <td>111 | 000</td></tr>
+                <tr><td>Y</td> <td>→</td> <td>111Y | 000Y | Λ</td></tr>
+                <tr><td>Z</td> <td>→</td> <td>01 | 10 | 00</td></tr>
+            </table>
+        </div>
+    
+</body>
+</html>

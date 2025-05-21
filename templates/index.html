@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+/>
+    <title>REC: Regular Expression Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='cssMain/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='logoimages/icon.png') }}">
+  </head>
+  <body>
+
+    <video class="video-background" autoplay muted loop>
+      <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    
+    <header>
+      <div class="navbar">
+        
+        <div class="title"><a href="#">Regular Expression Converter</a></div>
+        <ul class="links">
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('about') }}">About</a></li>
+          <li><a href="{{ url_for('tutorial') }}">Tutorial</a></li>
+          <li><a href="{{ url_for('documentation') }}">Documentation</a></li>
+
+        </ul>
+        <a href="{{ url_for('options') }}" class="action_btn">Get Started</a>
+        <div class="toggle_btn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </div>
+
+      <div class="dropdown_menu">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('tutorial') }}">Tutorial</a></li>
+        <li><a href="{{ url_for('documentation') }}">Documentation</a></li>
+        <li><a href="{{ url_for('options') }}" class="action_btn">Get Started</a></li>
+      </div>
+    </header>
+    <main>
+      <section id="hero">
+        <div class="image-container"> 
+          <img src="{{ url_for('static', filename='logoimages/icon.png') }}" alt="Image" class="responsive-img" id="animatedImage">
+      </div>
+        <h1>Welcome</h1>
+        <p>
+          A website that converts Regular Expressions into  <br/> 
+          Deterministic Finite Automata (DFA), Context-Free Grammars (CFG), and Pushdown Automata (PDA)
+        </p>
+        <a href="{{ url_for('options') }}" class="action_btn">Get Started</a>
+
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='cssMain/script.js') }}"></script>
+  </body>
+</html>
